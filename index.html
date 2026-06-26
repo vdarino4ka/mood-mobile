@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#111416">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Настроения">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Мобилка настроений - прототип</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">дневник состояния</p>
+          <h1>Как ты сейчас?</h1>
+        </div>
+        <button class="icon-button" id="clearButton" title="Очистить тестовые записи" aria-label="Очистить тестовые записи">×</button>
+      </header>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Состояние</h2>
+          <span id="moodStatus">не выбрано</span>
+        </div>
+        <div class="button-grid" id="moodButtons"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Деятельность</h2>
+          <span id="activityStatus">не выбрано</span>
+        </div>
+        <div class="button-grid activity-grid" id="activityButtons"></div>
+      </section>
+
+      <nav class="tabs" aria-label="Разделы">
+        <button class="tab active" data-tab="stats">Статистика</button>
+        <button class="tab" data-tab="history">История</button>
+        <button class="tab" data-tab="widget">Виджет</button>
+        <button class="tab" data-tab="data">Данные</button>
+      </nav>
+
+      <section class="panel" id="statsPanel">
+        <div class="filters">
+          <select id="periodSelect" aria-label="Период">
+            <option value="hour">час</option>
+            <option value="day">день</option>
+            <option value="week">неделя</option>
+            <option value="month">месяц</option>
+            <option value="year">год</option>
+          </select>
+          <select id="modeSelect" aria-label="Формат">
+            <option value="count">количество</option>
+            <option value="percent">проценты</option>
+          </select>
+        </div>
+        <div class="stats-list" id="statsList"></div>
+      </section>
+
+      <section class="panel hidden" id="historyPanel">
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="panel hidden" id="widgetPanel">
+        <div class="widget-preview">
+          <div class="widget-header">
+            <span>Быстрая запись</span>
+            <strong>сегодня</strong>
+          </div>
+          <div class="widget-actions">
+            <button data-quick-kind="mood" data-quick-value="никакое">никакое</button>
+            <button data-quick-kind="mood" data-quick-value="тревожное">тревожное</button>
+            <button data-quick-kind="activity" data-quick-value="батонюсь">батонюсь</button>
+            <button data-quick-kind="activity" data-quick-value="ум. труд">ум. труд</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="dataPanel">
+        <div class="data-actions">
+          <button class="utility-button" id="exportButton" type="button">Экспорт JSON</button>
+          <button class="utility-button" id="importButton" type="button">Импорт JSON</button>
+          <input class="file-input" id="importFile" type="file" accept="application/json,.json">
+        </div>
+        <p class="data-status" id="dataStatus">резервная копия</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
